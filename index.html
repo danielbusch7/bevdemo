@@ -1,17 +1,36 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>BEV Demo for Faster Training, Fewer Labels: Self-Supervised Pretraining for Fine-Grained BEV Segmentation</title>
+  <title>BEV Demo – Faster Training, Fewer Labels</title>
   <style>
-    body { margin: 0; background: #000; display: flex; justify-content: center; }
-    video { max-width: 100%; height: auto; }
+    /* Fullscreen black background */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      background: #000;
+      display: flex;
+      justify-content: center;   /* center horizontally */
+      align-items: center;       /* center vertically */
+      overflow: hidden;          /* avoid scrollbars */
+    }
+
+    /* Responsive video */
+    video {
+      max-width: 90vw;   /* leave some spacing on edges */
+      max-height: 90vh;
+      border-radius: 6px; /* subtle rounded corners */
+    }
   </style>
 </head>
 <body>
   <video autoplay loop muted playsinline controls>
-    <source src="paper2_short_nuscens_demo.mp4" type="video/mp4">
+    paper2_short_nuscens_demo.mp4
     Your browser does not support the video tag.
   </video>
 </body>
 </html>
+
