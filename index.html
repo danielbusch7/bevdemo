@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,67 +6,77 @@
   <title>BEV Demo – Faster Training, Fewer Labels</title>
 
   <style>
-    /* Reset + fullscreen layout */
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: sans-serif;
       background: #000;
     }
 
-    /* Background image container */
+    /* Framed background image */
     .background {
       position: fixed;
-      inset: 0; /* top, right, bottom, left = 0 */
+      top: 6vh;                 /* black gap above */
+      left: 5vw;
+      right: 5vw;
+      bottom: 5vh;
+
       background-image: url("page_background.png");
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       background-repeat: no-repeat;
+
+      border-radius: 10px;      /* subtle framing */
       z-index: 0;
     }
 
-    /* Overlay container for video */
+    /* Video placement relative to viewport */
     .video-container {
       position: fixed;
       left: 50%;
-      bottom: 8vh;                 /* controls vertical placement */
+      bottom: 10vh;
       transform: translateX(-50%);
       z-index: 1;
-      width: 80vw;                 /* responsive size */
+
+      width: 72vw;
       max-width: 1100px;
     }
 
-    /* Video styling */
     video {
       width: 100%;
       height: auto;
       border-radius: 8px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      box-shadow: 0 0 35px rgba(0,0,0,0.7);
     }
 
-    /* Mobile tweaks */
     @media (max-width: 768px) {
+      .background {
+        left: 4vw;
+        right: 4vw;
+        top: 5vh;
+      }
+
       .video-container {
-        width: 92vw;
-        bottom: 5vh;
+        width: 90vw;
+        bottom: 6vh;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Background image -->
+
   <div class="background"></div>
 
-  <!-- Video overlay -->
   <div class="video-container">
     <video autoplay loop muted playsinline controls preload="auto">
       <source src="paper2_short_nuscens_demo.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
+
 </body>
 </html>
+
