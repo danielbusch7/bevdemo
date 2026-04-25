@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,25 +13,30 @@
   }
 
   body {
-    overflow-y: auto;      /* ✅ allow vertical scrolling */
+    overflow-y: auto;
   }
 
   /* Page frame */
   .page {
-    padding-top: 6vh;      /* black gap on top */
+    padding-top: 6vh;
     padding-bottom: 6vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;    /* stack sections vertically */
+    align-items: center;
+    gap: 6vh;                  /* vertical spacing between blocks */
   }
 
   /* Background container */
   .bg-container {
-    position: relative;    /* ✅ anchor for absolute positioning */
-    width: 90vw;           /* equal left/right margins */
+    position: relative;
+    width: 90vw;
     max-width: 1600px;
+
+    /* original image width for scale */
+    --scale: calc(100% / 4384);
   }
 
-  /* Full background image (NOT cropped) */
+  /* Background image */
   .bg-container img {
     width: 100%;
     height: auto;
@@ -41,14 +47,17 @@
   /* Pixel-aligned video overlay */
   .overlay-video {
     position: absolute;
-
-    /*  PIXEL ALIGNMENT */
-    left: 521px;           /* X position in original image */
-    top: 2052px;           /* Y position in original image */
-
-    width: 3645px;          /* width in original pixels */
-
     z-index: 2;
+
+    /* --- PIXEL COORDINATES (ORIGINAL IMAGE SPACE) --- */
+    left: 521px;
+    top: 2052px;
+    width: 3645px;
+
+    /* --- RESPONSIVE SCALING --- */
+    left:  calc(521  * var(--scale));
+    top:   calc(2052 * var(--scale));
+    width: calc(3645 * var(--scale));
   }
 
   .overlay-video video {
@@ -58,19 +67,20 @@
     box-shadow: 0 0 35px rgba(0,0,0,0.7);
   }
 
-  /* ✅ SCALE PIXEL COORDINATES RESPONSIVELY */
-  .bg-container {
-    --scale: calc(100% / 4384); /* original image width */
-  }
-
-  .overlay-video {
-    left: calc(521 * var(--scale));
-    top:  calc(2052 * var(--scale));
-    width: calc(3645 * var(--scale));
+  /* Horizontal separator (within margins) */
+  .separator {
+    width: 90vw;
+    max-width: 1600px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.8);
   }
 
   @media (max-width: 768px) {
     .bg-container {
+      width: 96vw;
+    }
+
+    .separator {
       width: 96vw;
     }
   }
@@ -80,19 +90,32 @@
 <body>
 
 <div class="page">
+
+  <!-- ===== SECTION 1 ===== -->
   <div class="bg-container">
+    <img src="page_background.png" alt="Background 1">
 
-    <!-- Background image -->
-    <img src="page_background.png" alt="Background">
-
-    <!-- Pixel-aligned video -->
     <div class="overlay-video">
       <video autoplay loop muted playsinline controls preload="auto">
         <source src="paper2_short_nuscens_demo.mp4" type="video/mp4">
       </video>
     </div>
-
   </div>
+
+  <!-- ===== SEPARATOR ===== -->
+  <div class="separator"></div>
+
+  <!-- ===== SECTION 2 ===== -->
+  <div class="bg-container">
+    <img src="page_background_02.png" alt="Background 2">
+
+    <div class="overlay-video">
+      <video autoplay loop muted playsinline controls preload="auto">
+        <source src="paper1_short_nuscens_dem.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
 </div>
 
 </body>
