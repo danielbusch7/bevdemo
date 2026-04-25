@@ -1,34 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>BEV Demo – Faster Training, Fewer Labels</title>
+
   <style>
-    /* Fullscreen black background */
-    body {
+    /* Reset + fullscreen layout */
+    html, body {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      width: 100vw;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
       background: #000;
-      display: flex;
-      justify-content: center;   /* center horizontally */
-      align-items: center;       /* center vertically */
-      overflow: hidden;          /* avoid scrollbars */
     }
 
-    /* Responsive video */
+    /* Background image container */
+    .background {
+      position: fixed;
+      inset: 0; /* top, right, bottom, left = 0 */
+      background-image: url("page_background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    /* Overlay container for video */
+    .video-container {
+      position: fixed;
+      left: 50%;
+      bottom: 8vh;                 /* controls vertical placement */
+      transform: translateX(-50%);
+      z-index: 1;
+      width: 80vw;                 /* responsive size */
+      max-width: 1100px;
+    }
+
+    /* Video styling */
     video {
-      max-width: 90vw;   /* leave some spacing on edges */
-      max-height: 90vh;
-      border-radius: 6px; /* subtle rounded corners */
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 768px) {
+      .video-container {
+        width: 92vw;
+        bottom: 5vh;
+      }
     }
   </style>
 </head>
+
 <body>
-  <video autoplay loop muted playsinline controls>
-    <source src="paper2_short_nuscens_demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <!-- Background image -->
+  <div class="background"></div>
+
+  <!-- Video overlay -->
+  <div class="video-container">
+    <video autoplay loop muted playsinline controls preload="auto">
+      <source src="paper2_short_nuscens_demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 </body>
 </html>
